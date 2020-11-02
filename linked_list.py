@@ -16,13 +16,43 @@ class LinkedList:
     def is_sentinel(self):
         if self.value == None:
             return True
-        else:
-            return False
 
     def is_empty(self):
-        if self.prev == self and self.next == self: 
-            return True
+        return self.prev == self and self.next == self
+            
 
     def is_last(self): 
-        if self == self.is_empty:
-            return True
+        return self.next.value is None
+
+    def last(self):
+        return self.prev
+
+    def append(self, appends): 
+        self.prev.next = appends
+        appends.prev = self.prev
+        self.prev = appends
+        appends.next = self
+
+    def delete(self):
+        self.prev.next = self.next
+        self.next.prev = self.prev
+
+    def insert (self, inserts): 
+        inserts.prev  = self
+        inserts.next = self.next
+        self.next.prev = inserts
+        self.next = inserts
+
+    def at(self, N): 
+        if (N==0): 
+            return self
+        return self.next.at(N-1)
+
+    def search(self, value): 
+        if self.value == value: 
+            return self
+        elif self.next.value is None: 
+            return None
+        return self.next.search(value) 
+
+    def insert_in_order(self, inserts): 
